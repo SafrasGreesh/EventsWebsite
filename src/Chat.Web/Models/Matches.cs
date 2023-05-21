@@ -1,9 +1,10 @@
 ﻿using EventsWebsite.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace EventsWebsites.Models
 {
-    public class Matches
+    public class Matches : IdentityUser
     {
         public int? Id { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using EventsWebsite.Models;
+using EventsWebsites.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,10 @@ namespace EventsWebsite.Data
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Likes> Likes { get; set; }
+        public DbSet<Matches> Matches { get; set; }
+        public DbSet<Events> Events { get; set; }
+        public DbSet<Options> Options { get; set; }
         public DbSet<ApplicationUser> AppUsers { get; set; }
         public ApplicationDbContext()
         {
