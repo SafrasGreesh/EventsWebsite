@@ -1,4 +1,5 @@
 ﻿using EventsWebsite.Data;
+using EventsWebsite.Models;
 using EventsWebsites.Entity;
 using EventsWebsites.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -24,8 +25,8 @@ namespace EventsWebsite
 
                 context.Database.EnsureCreated();
 
-                context.AppUsers.RemoveRange(context.AppUsers);
-                context.AppUsers.Add(new AppUsers {Id= "1", UserName = "1231", EmailConfirmed = true, PhoneNumberConfirmed = true, TwoFactorEnabled = true, LockoutEnabled = true, AccessFailedCount = 1 });
+                //context.ApplicationUser.RemoveRange(context.ApplicationUser);
+                //context.ApplicationUser.Add(new ApplicationUser { Id= 1, UserName = "1231", EmailConfirmed = true, PhoneNumberConfirmed = true, TwoFactorEnabled = true, LockoutEnabled = true, AccessFailedCount = 1 });
                 
                 //context.Users.Add(new Users
                 //{
