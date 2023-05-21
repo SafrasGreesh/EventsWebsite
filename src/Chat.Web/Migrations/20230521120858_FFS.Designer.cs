@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EventsWebsites.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230520233724_FFF")]
-    partial class FFF
+    [Migration("20230521120858_FFS")]
+    partial class FFS
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,9 @@ namespace EventsWebsites.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<DateTime?>("dateTime")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 

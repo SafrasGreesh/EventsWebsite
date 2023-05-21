@@ -12,7 +12,7 @@ namespace EventsWebsite.Models
         public string FullName { get; set; }
         public string Avatar { get; set; }
         public string Description { get; set; }
-
+        public DateTime? dateTime { get; set; } 
         public ICollection<Room> Rooms { get; set; }
         public ICollection<Message> Messages { get; set; }
         public ICollection<Events> Events { get; set; }

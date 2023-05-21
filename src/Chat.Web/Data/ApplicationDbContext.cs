@@ -18,7 +18,10 @@ namespace EventsWebsite.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<ApplicationUser> AppUsers { get; set; }
-
+        public ApplicationDbContext()
+        {
+            Database.EnsureCreated();
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
