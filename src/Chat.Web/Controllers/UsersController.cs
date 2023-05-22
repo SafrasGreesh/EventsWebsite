@@ -5,6 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using EventsWebsites.Models;
+using EventsWebsite.Models;
+using EventsWebsite.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using EventsWebsite.Data;
+using EventsWebsite.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace EventsWebsites.Controllers
 {
@@ -12,15 +19,23 @@ namespace EventsWebsites.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-
+        private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly ApplicationDbContext _context;
 
-        public UsersController(IUserService userService)
+        //public UsersController(IUserService userService)
+        //{
+        //    _userService = userService;
+        //}
+
+        public UsersController(ApplicationDbContext context,
+            IMapper mapper,
+            IUserService userService)
         {
+            _context = context;
+            _mapper = mapper;
             _userService = userService;
         }
-
-        
 
         [HttpPost("update")]
         public async Task<IActionResult> UpdateInf(UserModel userModel)
@@ -78,15 +93,28 @@ namespace EventsWebsites.Controllers
 
         //[Authorize]
         [HttpGet("{id}")]
-        public IActionResult GetUserById(int id)
+        public async Task<ActionResult<ApplicationUser>> GetUserById(string id)
         {
-            var user = _userService.GetById(id.ToString());
+            var user = await _context.AppUsers.FindAsync(id);
 
             if (user == null)
                 return NotFound();
 
-            return Ok(user);
+            var userViewModel = _mapper.Map<ApplicationUser, UserViewModel>(user);
+
+            return Ok(userViewModel);
         }
+
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Room>> Get(int id)
+        //{
+        //    var room = await _context.Rooms.FindAsync(id);
+        //    if (room == null)
+        //        return NotFound();
+
+        //    var roomViewModel = _mapper.Map<Room, RoomViewModel>(room);
+        //    return Ok(roomViewModel);
+        //}
 
         [HttpGet("swipe")]
         public IActionResult Swipe()
@@ -96,44 +124,44 @@ namespace EventsWebsites.Controllers
             return Ok(users);
         }
 
-        [HttpPost("updateOptions")]
-        public async Task<IActionResult> UpdateOptions(Options optionsModel)
-        {
-            int? Id_us = HttpContext.Session.GetInt32("Id");
+        //[HttpPost("updateOptions")]
+        //public async Task<IActionResult> UpdateOptions(Options optionsModel)
+        //{
+        //    int? Id_us = HttpContext.Session.GetInt32("Id");
 
-            var response = await _userService.UpdateOptions(optionsModel, Id_us.ToString());
+        //    var response = await _userService.UpdateOptions(optionsModel, Id_us.ToString());
 
-            if (response == false)
-            {
-                return BadRequest(new { message = "Didn't edit!" });
-            }
+        //    if (response == false)
+        //    {
+        //        return BadRequest(new { message = "Didn't edit!" });
+        //    }
 
-            return Ok(response);
-        }
+        //    return Ok(response);
+        //}
 
-        [HttpGet("idOptions")]
-        public IActionResult GetOptionsId()
-        {
-            int? id = HttpContext.Session.GetInt32("Id");
+        //[HttpGet("idOptions")]
+        //public IActionResult GetOptionsId()
+        //{
+        //    int? id = HttpContext.Session.GetInt32("Id");
 
-            if (id != null)
-            {
-                Console.WriteLine("Значение id из сессии: " + id);
-                //return Ok(new { Id = id });
-            }
-            else
-            {
-                Console.WriteLine("Error");
-                //return BadRequest("Id not found in session.");
-            }
+        //    if (id != null)
+        //    {
+        //        Console.WriteLine("Значение id из сессии: " + id);
+        //        //return Ok(new { Id = id });
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Error");
+        //        //return BadRequest("Id not found in session.");
+        //    }
 
-            var options = _userService.GetOptionsById((id ?? 0).ToString());
+        //    var options = _userService.GetOptionsById((id ?? 0).ToString());
 
-            if (options == null)
-                return NotFound();
+        //    if (options == null)
+        //        return NotFound();
 
-            return Ok(options);
-        }
+        //    return Ok(options);
+        //}
 
         [HttpPost("likes")]
         public async Task<IActionResult> Like(int id, Boolean like)
