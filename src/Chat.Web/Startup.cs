@@ -16,6 +16,7 @@ using EventsWebsite.Hubs;
 using EventsWebsite.Models;
 using AutoMapper;
 using EventsWebsite.Helpers;
+using Microsoft.OpenApi.Models;
 
 namespace EventsWebsite
 {
@@ -31,6 +32,11 @@ namespace EventsWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -50,6 +56,8 @@ namespace EventsWebsite
             services.AddSignalR();
         }
 
+       
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -64,6 +72,11 @@ namespace EventsWebsite
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
