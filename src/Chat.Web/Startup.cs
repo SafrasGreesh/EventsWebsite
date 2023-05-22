@@ -17,6 +17,7 @@ using EventsWebsite.Models;
 using AutoMapper;
 using EventsWebsite.Helpers;
 using Microsoft.OpenApi.Models;
+using EventsWebsites.New;
 
 namespace EventsWebsite
 {
@@ -51,9 +52,12 @@ namespace EventsWebsite
 
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IFileValidator, FileValidator>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient(typeof(IEfRepository<>), typeof(UserRepository<>));
             services.AddRazorPages();
             services.AddControllers();
             services.AddSignalR();
+            services.AddHttpContextAccessor();
         }
 
        

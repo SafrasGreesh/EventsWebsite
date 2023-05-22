@@ -1,7 +1,7 @@
 ﻿using EventsWebsite.Data;
 using EventsWebsite.Models;
 using EventsWebsites.Entity;
-using EventsWebsites.Models;
+//using EventsWebsites.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

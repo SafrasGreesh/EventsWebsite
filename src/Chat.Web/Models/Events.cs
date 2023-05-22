@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventsWebsites.Models
+namespace EventsWebsite.Models
 {
     public class Events
     {

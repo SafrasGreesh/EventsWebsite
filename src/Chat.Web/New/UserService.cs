@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EventsWebsite.Services;
-using EventsWebsites.Models;
+//using EventsWebsites.Models;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;

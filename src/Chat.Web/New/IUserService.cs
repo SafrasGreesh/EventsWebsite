@@ -1,6 +1,6 @@
 ﻿using EventsWebsite.Models;
 using EventsWebsite.Services;
-using EventsWebsites.Models;
+//using EventsWebsite.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,4 +1,4 @@
-﻿namespace EventsWebsites.Models
+﻿namespace EventsWebsite.Models
 {
     public class Options
     {

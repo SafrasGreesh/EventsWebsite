@@ -5,10 +5,11 @@ using EventsWebsite.Data;
 using System.Linq;
 using EventsWebsites.Entity;
 using EventsWebsite.Models;
+//using EventsWebsites.Models;
 
 namespace EventsWebsites.New
 {
-    public class UserRepository<T> : IEfRepository<T> where T : ApplicationUser
+    public class UserRepository<T> : IEfRepository<T> where T : EventsWebsite.Models.ApplicationUser
     {
         private readonly ApplicationDbContext _context;
 

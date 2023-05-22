@@ -1,7 +1,7 @@
 ﻿using EventsWebsite.Models;
 using System;
 
-namespace EventsWebsites.Models
+namespace EventsWebsite.Models
 {
     public class Matches
     {
