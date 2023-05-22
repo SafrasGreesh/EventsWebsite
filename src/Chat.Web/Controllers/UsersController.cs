@@ -37,20 +37,20 @@ namespace EventsWebsites.Controllers
             _userService = userService;
         }
 
-        [HttpPost("update")]
-        public async Task<IActionResult> UpdateInf(UserModel userModel)
-        {
-            int? Id_us = HttpContext.Session.GetInt32("Id");
+        //[HttpPost("update")]
+        //public async Task<IActionResult> UpdateInf(UserModel userModel)
+        //{
+        //    int? Id_us = HttpContext.Session.GetInt32("Id");
 
-            var response = await _userService.UpdateInformation(userModel, Id_us);
+        //    var response = await _userService.UpdateInformation(userModel, Id_us);
 
-            if (response == null)
-            {
-                return BadRequest(new { message = "Didn't edit!" });
-            }
+        //    if (response == null)
+        //    {
+        //        return BadRequest(new { message = "Didn't edit!" });
+        //    }
 
-            return Ok(response);
-        }
+        //    return Ok(response);
+        //}
 
         [HttpGet("id")]
         public IActionResult GetId()
@@ -116,79 +116,79 @@ namespace EventsWebsites.Controllers
         //    return Ok(roomViewModel);
         //}
 
-        [HttpGet("swipe")]
-        public IActionResult Swipe()
-        {
-            int id = HttpContext.Session.GetInt32("Id") ?? 0;
-            var users = _userService.Swipe(id.ToString());
-            return Ok(users);
-        }
+        //[HttpGet("swipe")]
+        //public IActionResult Swipe()
+        //{
+        //    int id = HttpContext.Session.GetInt32("Id") ?? 0;
+        //    var users = _userService.Swipe(id.ToString());
+        //    return Ok(users);
+        //}
 
-        [HttpPost("updateOptions")]
-        public async Task<IActionResult> UpdateOptions(Options optionsModel)
-        {
-            int? Id_us = HttpContext.Session.GetInt32("Id");
+        //[HttpPost("updateOptions")]
+        //public async Task<IActionResult> UpdateOptions(Options optionsModel)
+        //{
+        //    int? Id_us = HttpContext.Session.GetInt32("Id");
 
-            var response = await _userService.UpdateOptions(optionsModel, Id_us.ToString());
+        //    var response = await _userService.UpdateOptions(optionsModel, Id_us.ToString());
 
-            if (response == false)
-            {
-                return BadRequest(new { message = "Didn't edit!" });
-            }
+        //    if (response == false)
+        //    {
+        //        return BadRequest(new { message = "Didn't edit!" });
+        //    }
 
-            return Ok(response);
-        }
+        //    return Ok(response);
+        //}
 
-        [HttpGet("idOptions")]
-        public IActionResult GetOptionsId()
-        {
-            int? id = HttpContext.Session.GetInt32("Id");
+        //[HttpGet("idOptions")]
+        //public IActionResult GetOptionsId()
+        //{
+        //    int? id = HttpContext.Session.GetInt32("Id");
 
-            if (id != null)
-            {
-                Console.WriteLine("Значение id из сессии: " + id);
-                //return Ok(new { Id = id });
-            }
-            else
-            {
-                Console.WriteLine("Error");
-                //return BadRequest("Id not found in session.");
-            }
+        //    if (id != null)
+        //    {
+        //        Console.WriteLine("Значение id из сессии: " + id);
+        //        return Ok(new { Id = id });
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Error");
+        //        return BadRequest("Id not found in session.");
+        //    }
 
-            var options = _userService.GetOptionsById((id ?? 0).ToString());
+        //    var options = _userService.GetOptionsById((id ?? 0).ToString());
 
-            if (options == null)
-                return NotFound();
+        //    if (options == null)
+        //        return NotFound();
 
-            return Ok(options);
-        }
+        //    return Ok(options);
+        //}
 
-        [HttpPost("likes")]
-        public async Task<IActionResult> Like(int id, Boolean like)
-        {
-            int? Id_us = HttpContext.Session.GetInt32("Id");
-            var response = await _userService.Like(Id_us, id, like);
+        //[HttpPost("likes")]
+        //public async Task<IActionResult> Like(int id, Boolean like)
+        //{
+        //    int? Id_us = HttpContext.Session.GetInt32("Id");
+        //    var response = await _userService.Like(Id_us, id, like);
 
-            if (response == false)
-            {
-                return BadRequest(new { message = "Didn't edit!" });
-            }
+        //    if (response == false)
+        //    {
+        //        return BadRequest(new { message = "Didn't edit!" });
+        //    }
 
-            return Ok(response);
-        }
+        //    return Ok(response);
+        //}
 
-        [HttpGet("matches")]
-        public IActionResult GetMathes()
-        {
-            int? id = HttpContext.Session.GetInt32("Id");
+        //[HttpGet("matches")]
+        //public IActionResult GetMathes()
+        //{
+        //    int? id = HttpContext.Session.GetInt32("Id");
 
-            var matches = _userService.Matches((id ?? 0).ToString());
+        //    var matches = _userService.Matches((id ?? 0).ToString());
 
-            if (matches == null)
-                return NotFound();
+        //    if (matches == null)
+        //        return NotFound();
 
-            return Ok(matches);
-        }
+        //    return Ok(matches);
+        //}
 
     }
 }
